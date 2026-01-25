@@ -1,0 +1,84 @@
+[
+  {
+    "_id": "service_001",
+    "name": "Baby Sitting Service",
+    "slug": "baby-sitting",
+    "category": "baby-care",
+    "shortDescription": "Trusted and caring babysitters for your child at home.",
+    "description": "Our Baby Sitting Service provides trained and verified caregivers to take care of your child in a safe and loving environment. Services include feeding, hygiene, playtime, and basic supervision.",
+    "serviceFor": "Children (0 - 5 years)",
+    "durationType": ["Hourly", "Daily"],
+    
+    "price": {
+      "hourly": 500,
+      "daily": 3500
+    },
+    "features": [
+      "Feeding support",
+      "Diaper changing",
+      "Playtime & supervision",
+      "Basic hygiene care"
+    ],
+    "safety": [
+      "Verified caregivers",
+      "Background checked",
+      "Secure booking"
+    ],
+    "image": "https://i.ibb.co.com/Xf6N2x0w/baby-Care.jpg",
+    "status": "active"
+  },
+  {
+    "_id": "service_002",
+    "name": "Elderly Care Service",
+    "slug": "elderly-care",
+    "category": "elderly-care",
+    "shortDescription": "Professional home care services for elderly family members.",
+    "description": "Our Elderly Care Service ensures comfort, safety, and companionship for senior citizens. Caregivers assist with daily activities, medication reminders, and emotional support.",
+    "serviceFor": "Senior Citizens (60+ years)",
+    "durationType": ["Hourly", "Daily"],
+    "price": {
+      "hourly": 600,
+      "daily": 4000
+    },
+    "features": [
+      "Daily activity assistance",
+      "Medication reminders",
+      "Mobility support",
+      "Emotional companionship"
+    ],
+    "safety": [
+      "Trained caregivers",
+      "Health & safety monitoring",
+      "Trusted professionals"
+    ],
+    "image": "https://i.ibb.co.com/Nn1zfrzW/oldladycare.png",
+    "status": "active"
+  },
+  {
+    "_id": "service_003",
+    "name": "Sick People Care Service",
+    "slug": "sick-people-care",
+    "category": "medical-support",
+    "shortDescription": "Home care support for sick or recovering patients.",
+    "description": "Our Sick People Care Service provides compassionate care for patients at home. Caregivers assist with daily needs, basic medical support, and ensure proper rest and recovery.",
+    "serviceFor": "Sick or recovering patients",
+    "durationType": ["Hourly", "Daily"],
+    "price": {
+      "hourly": 700,
+      "daily": 4500
+    },
+    "features": [
+      "Basic health monitoring",
+      "Medicine assistance",
+      "Hygiene & comfort care",
+      "Recovery support"
+    ],
+    "safety": [
+      "Experienced caregivers",
+      "Hygienic care practices",
+      "Emergency support ready"
+    ],
+    "image": "https://i.ibb.co.com/2YHBfjfq/old-Care.jpg",
+    "status": "active"
+  }
+]

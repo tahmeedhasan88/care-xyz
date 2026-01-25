@@ -1,0 +1,95 @@
+import { getSingleService } from '@/app/Server/service';
+import Image from 'next/image';
+import React from 'react';
+
+const serviceDetails = async ({params}) => {
+
+    
+    const {slug} = await params;
+    const service = await getSingleService(slug);
+    console.log(service)
+
+    
+
+    return (
+        <div className="max-w-6xl mx-auto px-4 py-10">
+      {/* Top Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Image */}
+        <div className="w-full h-[350px] relative rounded-xl overflow-hidden shadow">
+          <Image
+            src={service.image}
+            alt={service.name}
+            fill
+            className="object-cover"
+          />
+        </div>
+
+        {/* Main Info */}
+        <div>
+          <h1 className="text-3xl font-bold text-gray-800 mb-3">
+            {service.name}
+          </h1>
+
+          <p className="text-gray-600 mb-4">
+            {service.description}
+          </p>
+
+          <div className="space-y-2 text-sm text-gray-700">
+            <p>
+              <span className="font-semibold">Category:</span>{" "}
+              {service.category}
+            </p>
+            <p>
+              <span className="font-semibold">Service For:</span>{" "}
+              {service.serviceFor}
+            </p>
+            <p>
+              <span className="font-semibold">Available Duration:</span>{" "}
+              {service.durationType.join(", ")}
+            </p>
+          </div>
+
+          {/* Price */}
+          <div className="mt-4 p-4 bg-gray-100 rounded-lg">
+            <p className="font-semibold text-gray-800 mb-1">Pricing</p>
+            <p>Hourly: ৳ {service.price.hourly}</p>
+            <p>Daily: ৳ {service.price.daily}</p>
+          </div>
+
+          {/* Booking Button */}
+          <button
+            className="mt-6 w-full md:w-auto bg-[#0abde3] hover:bg-[#0097c4] text-white px-8 py-3 rounded-lg font-semibold transition"
+          >
+            Book This Service
+          </button>
+        </div>
+      </div>
+
+      {/* Extra Details */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+        {/* Features */}
+        <div>
+          <h2 className="text-xl font-semibold mb-3">Service Features</h2>
+          <ul className="list-disc list-inside space-y-2 text-gray-700">
+            {service.features.map((feature, index) => (
+              <li key={index}>{feature}</li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Safety */}
+        <div>
+          <h2 className="text-xl font-semibold mb-3">Safety & Trust</h2>
+          <ul className="list-disc list-inside space-y-2 text-gray-700">
+            {service.safety.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+    );
+};
+
+export default serviceDetails;
