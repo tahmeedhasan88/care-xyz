@@ -2,6 +2,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Footer from "./Components/Layouts/Footer";
 import Navbar from "./Components/Navbar";
+import Head from "next/head";
 
 const poppins = Poppins(
   {
@@ -32,7 +33,7 @@ export const metadata = {
   creator: "Care.xyz",
   publisher: "Care.xyz",
 
-  metadataBase: new URL("https://care-nxzc5cm2h-tahmeed-hasans-projects.vercel.app/"),
+  metadataBase: new URL("https://care-nxzc5cm2h-tahmeed-hasans-projects.vercel.app"),
 
   icons: {
     icon: "https://i.ibb.co.com/WptKJVRy/logo.png",
@@ -44,7 +45,7 @@ export const metadata = {
     title: "Care.xyz | Trusted Baby Sitting & Elderly Care Service",
     description:
       "Find reliable baby sitters, elderly caregivers, and home care professionals with Care.xyz.",
-    url: "https://care-xyz.vercel.app",
+    url: "https://care-nxzc5cm2h-tahmeed-hasans-projects.vercel.app",
     siteName: "Care.xyz",
     images: [
       {
@@ -90,17 +91,22 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.className} antialiased bg-[#f1f2f6]`}
-      >
+      <Head>
+        <title>Care.xyz | Trusted Baby Sitting & Elderly Care Service</title>
+        <meta name="description" content="Care.xyz is a trusted platform for baby sitting, elderly care, and home care services. Book verified caretakers easily and securely." />
+        <meta property="og:title" content="Care.xyz | Trusted Baby Sitting & Elderly Care Service" />
+        <meta property="og:image" content="https://i.ibb.co.com/Tx5LJHBs/bannerofcare.jpg" />
+        <meta property="og:url" content="https://care-nxzc5cm2h-tahmeed-hasans-projects.vercel.app" />
+      </Head>
+      <body className={`${poppins.className} antialiased bg-[#f1f2f6]`}>
         <header>
-          <Navbar></Navbar>
+          <Navbar />
         </header>
 
         {children}
 
         <footer>
-          <Footer></Footer>
+          <Footer />
         </footer>
       </body>
     </html>
