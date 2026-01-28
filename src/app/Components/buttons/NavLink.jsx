@@ -8,7 +8,7 @@ const NavLink = ({href, children}) => {
     const path = usePathname();
 
     return (
-        <Link className={`${path.startsWith(href) && "text-blue-700"} font-semibold`} href={href}>{children}</Link>
+        <Link className={`${path.startsWith(href) && "text-[#0abde3]"} font-semibold`} href={href}>{children}</Link>
     );
 };
 

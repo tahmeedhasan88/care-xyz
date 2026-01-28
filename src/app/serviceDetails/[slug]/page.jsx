@@ -72,7 +72,7 @@ const serviceDetails = async ({params}) => {
           {/* Booking Button */}
           <Link  href={`/booking/${service._id}`}>
           <button
-            className="mt-6 w-full md:w-auto bg-[#0abde3] hover:bg-[#0097c4] text-white px-8 py-3 rounded-lg font-semibold transition"
+            className="mt-6 w-full md:w-auto bg-[#10ac84] hover:bg-[#128166] text-white px-8 py-3 rounded-lg font-semibold transition"
           >
             Book This Service
           </button>
