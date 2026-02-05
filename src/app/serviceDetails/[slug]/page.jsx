@@ -70,7 +70,7 @@ const serviceDetails = async ({params}) => {
           </div>
 
           {/* Booking Button */}
-          <Link  href={`/booking/${service._id}`}>
+          <Link href={`/booking/${service.slug}`}>
           <button
             className="mt-6 w-full md:w-auto bg-[#10ac84] hover:bg-[#128166] text-white px-8 py-3 rounded-lg font-semibold transition"
           >

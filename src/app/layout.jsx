@@ -90,7 +90,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+
       <Head>
         <title>Care.xyz | Trusted Baby Sitting & Elderly Care Service</title>
         <meta name="description" content="Care.xyz is a trusted platform for baby sitting, elderly care, and home care services. Book verified caretakers easily and securely." />

@@ -4,8 +4,8 @@ import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#f5f7fa] px-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6 md:p-8">
+        <div className="min-h-screen flex items-center justify-center bg-[#f5f7fa] px-4 ">
+      <div className="w-full max-w-md bg-white rounded-xl p-6 md:p-8 shadow-[#1f3b4d] shadow-lg">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Create an Account
         </h2>
