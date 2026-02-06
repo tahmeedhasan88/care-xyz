@@ -53,7 +53,7 @@ const Banner = () => {
       {/* LEFT */}
       <img
         src={images[getIndex(-1)]}
-        className="absolute w-[55%] lg:w-[40%] h-[80%] object-cover rounded-xl
+        className="absolute w-[55%] lg:w-[40%] h-[70%] object-cover rounded-xl
         scale-90 opacity-40 -translate-x-[55%] z-0 transition-all duration-700"
         alt="left"
       />
@@ -61,7 +61,7 @@ const Banner = () => {
       {/* RIGHT */}
       <img
         src={images[getIndex(1)]}
-        className="absolute w-[55%] lg:w-[40%] h-[80%] object-cover rounded-xl
+        className="absolute w-[55%] lg:w-[40%] h-[70%] object-cover rounded-xl
         scale-90 opacity-40 translate-x-[55%] z-0 transition-all duration-700"
         alt="right"
       />
@@ -69,7 +69,7 @@ const Banner = () => {
       {/* MAIN */}
       <img
         src={images[index]}
-        className="relative w-[70%] lg:w-[45%] h-full object-cover rounded-xl
+        className="relative w-[70%] lg:w-[45%] h-[80%] object-cover rounded-xl
         z-10 shadow-2xl transition-all duration-700"
         alt="main"
       />
@@ -89,7 +89,7 @@ const Banner = () => {
         ❯
       </button>
     </div>
-    <h1 className="font-bold text-2xl lg:text-4xl text-center mt-10 shine-text">
+    <h1 className="font-bold text-2xl lg:text-4xl text-center mt-5 shine-text">
   CARING FOR YOUR LOVED ONES, BECAUSE THEY DESERVE THE BEST EVERYDAY
 </h1>
 

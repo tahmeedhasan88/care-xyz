@@ -24,7 +24,7 @@ const bgColors = [
         <div className='mt-20'>
             <h1 className='text-2xl lg:text-3xl font-bold text-center'>Services</h1>
 
-    <div className=' flex flex-col lg:flex-row gap-10 items-center justify-center my-10'>
+    <div className=' flex flex-col lg:flex-row gap-5 px-5 items-center justify-center my-10'>
         
                 {
                 services.map((service, index) => {
@@ -39,7 +39,7 @@ const bgColors = [
                 >
                 <Icon className="size-8 lg:size-10" />
 
-                <h1 className="text-2xl lg:text-3xl font-semibold">
+                <h1 className="text-xl lg:text-2xl font-semibold">
                 {service.name}
                 </h1>
 

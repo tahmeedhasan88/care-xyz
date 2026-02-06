@@ -5,14 +5,14 @@ import Link from 'next/link';
 
 const Navbar = () => {
 
-const nav = <div className='flex flex-col lg:flex-row items-center gap-2 text-[16px] font-semibold'>
+const nav = <div className='flex flex-col lg:flex-row items-center gap-4 text-[16px] font-semibold'>
                 <li><NavLink href={"/"}>Home</NavLink></li>
                 <li>About</li>
-                <li>Contact</li>
+                <li><NavLink href={"/my-bookings"}>My Bookings</NavLink></li>
             </div>
 
 
-const recognizationButton = <div className='flex flex-col lg:gap-4 lg:flex-row'>
+const recognizationButton = <div className='flex flex-col items-center gap-2 mt-2 lg:gap-4 lg:flex-row'>
 
                             <Link href={'/auth/login'}>
                             <button className='text-white px-4 py-2 bg-[#0abde3] hover:bg-[#196677] rounded-[5px] font-semibold '>Login</button>
@@ -27,7 +27,7 @@ const recognizationButton = <div className='flex flex-col lg:gap-4 lg:flex-row'>
     return (
         <div>
             
-        <div className="navbar bg-[#2C3A47] text-white lg:px-10">
+        <div className="navbar bg-[#2C3A47] text-white lg:px-10 relative z-50">
         <div className="navbar-start">
         <div className="dropdown">
         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -35,7 +35,7 @@ const recognizationButton = <div className='flex flex-col lg:gap-4 lg:flex-row'>
         </div>
         <ul
         tabIndex="-1"
-        className="menu menu-sm dropdown-content bg-white text-black rounded-box z-1 mt-3 w-52 p-2 shadow">
+        className="menu menu-sm dropdown-content bg-white text-black rounded-box z-50  mt-3 w-52 p-2 shadow">
         {nav}
         {recognizationButton}
         </ul>
