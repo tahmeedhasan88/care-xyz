@@ -1,10 +1,14 @@
 "use client"
 import { signIn } from "next-auth/react"
 import Link from 'next/link';
+import { useRouter } from "next/navigation";
 import React from 'react';
 import { FcGoogle } from "react-icons/fc";
+import Swal from "sweetalert2";
 
 const Login = () => {
+
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
 
@@ -24,6 +28,13 @@ const Login = () => {
     password: formData.password, 
     redirect: false,
     });
+    console.log(result)
+    if(!result.ok){
+      Swal.fire("error", "Email and Password not matched", "error")
+    }else{
+      Swal.fire("Successful", "Welcome to Care.xyz", "success");
+      router.push("/");
+    }
 }
 
 

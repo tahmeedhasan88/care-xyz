@@ -3,6 +3,7 @@ import "./globals.css";
 import Footer from "./Components/Layouts/Footer";
 import Navbar from "./Components/Navbar";
 import Head from "next/head";
+import NextAuthProvider from "./provider/NextAuthProvider";
 
 const poppins = Poppins(
   {
@@ -90,6 +91,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    <NextAuthProvider>
+
     <html lang="en" suppressHydrationWarning>
 
       <Head>
@@ -111,5 +114,9 @@ export default function RootLayout({ children }) {
         </footer>
       </body>
     </html>
+
+
+
+    </NextAuthProvider>
   );
 }

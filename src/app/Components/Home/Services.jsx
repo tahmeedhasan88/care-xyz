@@ -6,11 +6,12 @@ import { MdOutlineElderlyWoman } from "react-icons/md";
 import { LuBriefcaseMedical } from "react-icons/lu";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 
 const Services = () => {
 
-    const isLogin = false;
+    const session = useSession();
     const router = useRouter();
 
   const icons = [
@@ -39,7 +40,7 @@ const bgColors = [
                 <div 
 
                 onClick={() => {
-                if (isLogin) {
+                if (session.status == "authenticated") {
                     router.push(`/serviceDetails/${service.slug}`);
                 
                 } else {

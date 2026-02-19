@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from './Layouts/Logo';
 import NavLink from './buttons/NavLink';
 import Link from 'next/link';
+import Recognization from './buttons/Recognization';
 
 const Navbar = () => {
 
@@ -12,17 +13,8 @@ const nav = <div className='flex flex-col lg:flex-row items-center gap-4 text-[1
             </div>
 
 
-const recognizationButton = <div className='flex flex-col items-center gap-2 mt-2 lg:gap-4 lg:flex-row'>
 
-                            <Link href={'/auth/login'}>
-                            <button className='text-white px-4 py-2 bg-[#0abde3] hover:bg-[#196677] rounded-[5px] font-semibold '>Login</button>
-                            </Link>
 
-                            <Link href={'/auth/register'}>
-                            <button className='text-white px-4 py-2 bg-[#10ac84] hover:bg-[#128166] rounded-[5px] font-semibold '>Signup</button>
-                            </Link>
-
-                            </div>
 
     return (
         <div>
@@ -37,7 +29,7 @@ const recognizationButton = <div className='flex flex-col items-center gap-2 mt-
         tabIndex="-1"
         className="menu menu-sm dropdown-content bg-white text-black rounded-box z-50  mt-3 w-52 p-2 shadow">
         {nav}
-        {recognizationButton}
+        <Recognization></Recognization>
         </ul>
         </div>
         <Logo></Logo>
@@ -48,7 +40,7 @@ const recognizationButton = <div className='flex flex-col items-center gap-2 mt-
         </ul>
         </div>
         <div className="navbar-end lg:flex hidden">
-        {recognizationButton}
+        <Recognization></Recognization>
         </div>
         </div>
 
