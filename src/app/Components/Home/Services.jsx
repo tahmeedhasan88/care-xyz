@@ -1,14 +1,19 @@
+"use client"
 import React from 'react';
 import { FaBabyCarriage } from "react-icons/fa";
 import services from "@/app/data/servicess.json";
 import { MdOutlineElderlyWoman } from "react-icons/md";
 import { LuBriefcaseMedical } from "react-icons/lu";
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 
 const Services = () => {
 
-    const icons = [
+    const isLogin = false;
+    const router = useRouter();
+
+  const icons = [
   FaBabyCarriage,
   MdOutlineElderlyWoman,
   LuBriefcaseMedical,
@@ -31,7 +36,19 @@ const bgColors = [
                 const Icon = icons[index];
                 
                 return (
-                <Link key={service.slug} href={`/serviceDetails/${service.slug}`}>
+                <div 
+
+                onClick={() => {
+                if (isLogin) {
+                    router.push(`/serviceDetails/${service.slug}`);
+                
+                } else {
+                    router.push("/auth/login");
+                
+                }
+                }}
+
+                key={service.slug} >
                 <div 
                 key={service._id}
                 style={{ backgroundColor: bgColors[index] }}
@@ -47,7 +64,7 @@ const bgColors = [
                 {service.shortDescription}
                 </h4>
                 </div>
-                </Link>
+                </div>
                 );
                 })
                 }

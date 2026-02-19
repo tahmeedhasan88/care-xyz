@@ -1,11 +1,35 @@
+"use client"
+import { signIn } from "next-auth/react"
 import Link from 'next/link';
 import React from 'react';
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
+
+  const handleSubmit = async (e) => {
+
+   e.preventDefault();
+
+   const form = e.target;
+
+   const formData = {
+
+    email: form.email.value,
+    password: form.password.value,
+
+   };
+
+   const result = await signIn("credentials", {
+    email: formData.email,
+    password: formData.password, 
+    redirect: false,
+    });
+}
+
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#f5f7fa] px-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-[#1f3b4d] shadow-lg p-6 md:p-8">
+      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white rounded-xl shadow-[#1f3b4d] shadow-lg p-6 md:p-8">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Login to Care.xyz
         </h2>
@@ -17,7 +41,9 @@ const Login = () => {
           </label>
           <input
             type="email"
+            name='email'
             placeholder="Enter your email"
+            required
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#1f3b4d] outline-none"
           />
         </div>
@@ -29,7 +55,9 @@ const Login = () => {
           </label>
           <input
             type="password"
+            name='password'
             placeholder="Enter your password"
+            required
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#1f3b4d] outline-none"
           />
         </div>
@@ -55,7 +83,7 @@ const Login = () => {
         </button>
     
         <h4 className='text-sm text-center mt-3'>Didn't have an account? <Link href={"/auth/register"}><span className='text-[#1f3b4d] font-semibold'>Register</span></Link></h4>
-      </div>
+      </form>
     </div>
     );
 };

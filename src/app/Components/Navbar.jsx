@@ -7,7 +7,7 @@ const Navbar = () => {
 
 const nav = <div className='flex flex-col lg:flex-row items-center gap-4 text-[16px] font-semibold'>
                 <li><NavLink href={"/"}>Home</NavLink></li>
-                <li>About</li>
+                <li><NavLink href={"/about-us"}>About</NavLink></li>
                 <li><NavLink href={"/my-bookings"}>My Bookings</NavLink></li>
             </div>
 
