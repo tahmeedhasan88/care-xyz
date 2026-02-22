@@ -53,7 +53,7 @@ const bgColors = [
                 <div 
                 key={service._id}
                 style={{ backgroundColor: bgColors[index] }}
-                className="flex flex-col items-center gap-2 rounded-[15px] p-7 lg:p-10 shadow-2xl"
+                className="flex flex-col items-center gap-2 rounded-[15px] p-7 lg:p-10 shadow-2xl text-[#2d3436]"
                 >
                 <Icon className="size-8 lg:size-10" />
 

@@ -1,9 +1,10 @@
 "use client"
+import GoogleButton from '@/app/Components/buttons/GoogleButton';
 import { postUser } from '@/app/Server/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { FcGoogle } from "react-icons/fc";
+
 
 const Register = () => {
 
@@ -51,7 +52,7 @@ const handleSubmit = async (e) => {
             name='name'
             required
             placeholder="Enter your full name"
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#1f3b4d] outline-none"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#1f3b4d] outline-none text-black"
           />
         </div>
 
@@ -65,7 +66,7 @@ const handleSubmit = async (e) => {
             name='email'
             required
             placeholder="Enter your email"
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#1f3b4d] outline-none"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#1f3b4d] outline-none text-black"
           />
         </div>
 
@@ -79,7 +80,7 @@ const handleSubmit = async (e) => {
             name='password'
             required
             placeholder="Create a password"
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#1f3b4d] outline-none"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#1f3b4d] outline-none text-black"
           />
         </div>
 
@@ -96,12 +97,7 @@ const handleSubmit = async (e) => {
         </div>
 
         {/* Google Register */}
-        <button className="w-full border flex items-center justify-center gap-2 py-2 rounded-lg hover:bg-gray-100 transition">
-          <FcGoogle></FcGoogle>
-          <span className="text-sm font-medium text-gray-700">
-            Continue with Google
-          </span>
-        </button>
+        <GoogleButton></GoogleButton>
         <h4 className='text-sm text-center mt-3'>Already have an account? <Link href={"/auth/login"}><span className='text-[#1f3b4d] font-semibold'>Login</span></Link></h4>
       </form>
       

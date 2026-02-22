@@ -1,12 +1,15 @@
 "use client"
+import GoogleButton from "@/app/Components/buttons/GoogleButton";
 import { signIn } from "next-auth/react"
 import Link from 'next/link';
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React from 'react';
-import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 
 const Login = () => {
+
+  const searchParams = useSearchParams();
+  console.log()
 
   const router = useRouter();
 
@@ -26,14 +29,15 @@ const Login = () => {
    const result = await signIn("credentials", {
     email: formData.email,
     password: formData.password, 
-    redirect: false,
+    // redirect: false,
+    callbackUrl: searchParams.get("callbackUrl") || "/",
     });
     console.log(result)
     if(!result.ok){
       Swal.fire("error", "Email and Password not matched", "error")
     }else{
       Swal.fire("Successful", "Welcome to Care.xyz", "success");
-      router.push("/");
+      
     }
 }
 
@@ -55,7 +59,7 @@ const Login = () => {
             name='email'
             placeholder="Enter your email"
             required
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#1f3b4d] outline-none"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#1f3b4d] outline-none text-black"
           />
         </div>
 
@@ -69,7 +73,7 @@ const Login = () => {
             name='password'
             placeholder="Enter your password"
             required
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#1f3b4d] outline-none"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#1f3b4d] outline-none text-black"
           />
         </div>
 
@@ -86,12 +90,7 @@ const Login = () => {
         </div>
 
         {/* Google Login */}
-        <button className="w-full border flex items-center justify-center gap-2 py-2 rounded-lg hover:bg-gray-100 transition">
-          <FcGoogle></FcGoogle>
-          <span className="text-sm font-medium text-gray-700">
-            Continue with Google
-          </span>
-        </button>
+        <GoogleButton></GoogleButton>
     
         <h4 className='text-sm text-center mt-3'>Didn't have an account? <Link href={"/auth/register"}><span className='text-[#1f3b4d] font-semibold'>Register</span></Link></h4>
       </form>
