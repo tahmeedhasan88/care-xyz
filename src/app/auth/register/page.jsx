@@ -1,36 +1,81 @@
 "use client"
 import GoogleButton from '@/app/Components/buttons/GoogleButton';
 import { postUser } from '@/app/Server/auth';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
+import Swal from 'sweetalert2';
 
 
 const Register = () => {
 
 const router = useRouter();
+const searchParams = useSearchParams();
+const callbackUrl = searchParams.get("callBackUrl") || "/";
 
 const handleSubmit = async (e) => {
+  e.preventDefault();
 
-   e.preventDefault();
+  const form = e.target;
 
-   const form = e.target;
-
-   const formData = {
-
+  const formData = {
     name: form.name.value,
     email: form.email.value,
     password: form.password.value,
+  };
 
-   };
+  const result = await postUser(formData);
 
-   const result = await postUser(formData);
+  if (result.acknowledged) {
+  
+    await Swal.fire({
+      title: 'Successful!',
+      text: 'Account creation completed! Login processing...',
+      icon: 'success',
+      timer: 2000, 
+      showConfirmButton: false,
+      allowOutsideClick: false,
+    });
 
-   if(result.acknowledged){
-    alert("Successfull. Please login");
-    router.push('/auth/login');
-   }
-}
+   
+    const signInResult = await signIn("credentials", {
+      email: formData.email,
+      password: formData.password,      
+      redirect: false,                   
+      callbackUrl: callbackUrl,
+    });
+
+    if (signInResult?.error) {
+      
+      await Swal.fire({
+        title: 'Login Failed',
+        text: signInResult.error,
+        icon: 'error',
+        confirmButtonText: 'Okay',
+        confirmButtonColor: '#1f3b4d',
+      });
+    } else if (signInResult?.ok) {
+      await Swal.fire({
+        title: 'Welcome',
+        text: 'Login Successfully',
+        icon: 'success',
+        timer: 1800,
+        showConfirmButton: false,
+      });
+
+      router.push(callbackUrl || '/'); 
+    }
+  } else {
+  
+    await Swal.fire({
+      title: 'Sorry!',
+      text: 'Something went wrong. Try again later!!',
+      icon: 'error',
+      confirmButtonText: 'Try Again',
+    });
+  }
+};
 
 
 

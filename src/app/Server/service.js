@@ -2,6 +2,9 @@
 
 "use server";
 
+import { getServerSession } from "next-auth";
+import { authOptions } from "../lib/authOptions";
+
 const { dbConnect, collection } = require("../lib/dbConnects");
 
 export const getSingleService = async (slug) => {
@@ -21,13 +24,33 @@ export const getSingleService = async (slug) => {
     return null;
   }
 };
+//---------------------------------------------------
+
+export async function POST(req) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  return Response.json({ email: session.user.email });
+}
 
 // ------------------ নতুন ফাংশন যোগ করো এখানে ------------------
 export const createBooking = async (formData) => {
   try {
+
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
+      return { success: false, message: "Unauthorized" };
+    }
     // formData থেকে সব ডাটা নেওয়া
     const booking = {
       serviceId: formData.get("serviceId"),
+       senderName: session.user.name, 
+      senderEmail: session.user.email,
+      senderImage: session.user.image, 
       serviceName: formData.get("serviceName"),
       serviceSlug: formData.get("serviceSlug"),
       durationType: formData.get("durationType"),
@@ -38,8 +61,7 @@ export const createBooking = async (formData) => {
       address: formData.get("address"),
       totalCost: Number(formData.get("totalCost")),
       createdAt: new Date(),
-      status: "pending",           // পরে চাইলে confirmed, cancelled ইত্যাদি করতে পারো
-      // userId: ... যদি লগইন সিস্টেম থাকে তাহলে যোগ করো
+      status: "pending",          
     };
 
     // MongoDB-তে insert

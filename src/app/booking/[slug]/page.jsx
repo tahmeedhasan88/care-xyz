@@ -7,11 +7,15 @@ import districts from "@/app/data/districts";
 import { useForm, useWatch } from "react-hook-form";
 import { getSingleService, createBooking } from "@/app/Server/service";
 import { useParams } from "next/navigation";
-import Loading from "./Loading"; // তোমার Loading কম্পোনেন্ট
+import Loading from "./Loading"; 
 import Swal from "sweetalert2";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const BookingPage = () => {
   const params = useParams();
+  const { data: session, status } = useSession();
+
   const slug = params?.slug;
 
   const [service, setService] = useState(null);
@@ -84,6 +88,7 @@ const BookingPage = () => {
     const confirm = await Swal.fire({
       title: "Confirm Booking?",
       html: `
+        Name: <b>${session.user.name}</b><br>
         Service: <b>${service.name}</b><br>
         Duration: <b>${data.durationValue} ${data.durationType}</b><br>
         Location: <b>${data.senderDivision}, ${data.senderDistrict}, ${data.city}</b><br>
@@ -107,6 +112,8 @@ const BookingPage = () => {
 
     const formData = new FormData();
     formData.append("serviceId", service._id);
+    // formData.append("senderName", session.user.name);
+    // formData.append("senderEmail", session.user.email);
     formData.append("serviceName", service.name);
     formData.append("serviceSlug", slug);
     formData.append("durationType", data.durationType);
@@ -123,7 +130,7 @@ const BookingPage = () => {
 
     if (response?.success) {
       Swal.fire("Success!", "Booking confirmed", "success");
-      // চাইলে রিডাইরেক্ট করতে পারো: window.location.href = "/my-bookings";
+      
     } else {
       Swal.fire("Error", response?.message || "Something went wrong", "error");
     }
@@ -143,7 +150,9 @@ const BookingPage = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
-      <h1 className="text-2xl font-bold mb-6">Booking: {service.name}</h1>
+      <h1 className="text-2xl font-bold ">Booking: <span className="text-[#10ac84]">{service.name}</span></h1>
+      <h1 className="text-xl  font-semibold mb-6">Customer Name: <span className="text-[#0abde3]">{session?.user?.name}</span> </h1>
+      
 
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Duration Type */}

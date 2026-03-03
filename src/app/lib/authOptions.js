@@ -1,6 +1,8 @@
 import CredentialsProvider from "next-auth/providers/credentials"
 import { loginUser } from "../Server/auth";
 import GoogleProvider from "next-auth/providers/google";
+import { signIn } from "next-auth/react";
+import { collection, dbConnect } from "./dbConnects";
 export const authOptions = {
   // Configure one or more authentication providers
   providers: [
@@ -25,4 +27,31 @@ export const authOptions = {
   }),
 
   ],
+
+  callbacks:{
+    async signIn({ user, account , profile, email, credentials})
+    
+    {console.log({ user, account , profile, email, credentials});
+
+    const isExist = await dbConnect(collection.USERS).findOne({
+      email: user.email,
+      provider: account?.provider,
+    })
+
+    if(isExist){
+      return true;
+    }
+    
+    const newUser = {
+        provider: account?.provider,
+        name: user.name, 
+        email: user.email, 
+        image: user.image,
+        role: "user"
+    }
+
+    const result = await dbConnect(collection.USERS).insertOne(newUser)
+
+      return result.acknowledged;}
+  },
 }
