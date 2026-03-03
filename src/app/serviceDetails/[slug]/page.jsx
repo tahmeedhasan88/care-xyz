@@ -8,7 +8,7 @@ export const metadata = {
   description:
     "Professional baby sitting service with trained and verified caregivers.",
   openGraph: {
-    images: ["https://i.ibb.co.com/kVnTNSWx/tr6u.jpg"],
+    images: ["https://i.ibb.co/kVnTNSWx/tr6u.jpg"],
   },
 };
 
@@ -29,7 +29,7 @@ const serviceDetails = async ({params}) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Image */}
         <div className="w-full h-[350px] relative rounded-xl overflow-hidden shadow">
-          <Image
+          <img
             src={service.image}
             alt={service.name}
             fill

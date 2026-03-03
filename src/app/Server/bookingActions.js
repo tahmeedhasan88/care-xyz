@@ -95,3 +95,48 @@ export async function confirmBooking(formData) {
     return { success: false, error: 'কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।' };
   }
 }
+
+
+
+
+
+
+export async function deleteBooking(formData) {
+  try {
+    const bookingId = formData.get('bookingId');
+
+    if (!bookingId) {
+      return { success: false, error: 'Booking ID দরকার' };
+    }
+
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.email) {
+      return { success: false, error: 'লগইন করা আবশ্যক' };
+    }
+
+    const db = await dbConnect(collection.BOOKINGS);
+
+    const booking = await db.findOne({ _id: new ObjectId(bookingId) });
+    if (!booking) {
+      return { success: false, error: 'বুকিং পাওয়া যায়নি' };
+    }
+
+    // শুধু নিজের বুকিং ডিলিট করতে পারবে
+    if (booking.senderEmail !== session.user.email) {
+      return { success: false, error: 'এটা আপনার বুকিং নয়' };
+    }
+
+    const result = await db.deleteOne({ _id: new ObjectId(bookingId) });
+
+    if (result.deletedCount === 0) {
+      return { success: false, error: 'ডিলিট করা যায়নি' };
+    }
+
+    revalidatePath('/my-bookings');
+
+    return { success: true, message: 'বুকিং সফলভাবে ডিলিট করা হয়েছে' };
+  } catch (error) {
+    console.error('Delete booking error:', error);
+    return { success: false, error: 'কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।' };
+  }
+}

@@ -2,7 +2,8 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../lib/authOptions";
 import { collection, dbConnect } from "../lib/dbConnects";
 import DownloadButton from "../Components/buttons/DownloadButton";
-import { cancelBooking, confirmBooking } from "../Server/bookingActions";
+import { cancelBooking, confirmBooking, deleteBooking } from "../Server/bookingActions";
+import DeleteBookingButton from "../Components/buttons/DeleteBookingButton";
 
 const DEFAULT_AVATAR = "/avatar.png";
 
@@ -13,7 +14,7 @@ export default async function MyBookings() {
   if (!userEmail) {
     return (
       <div className="max-w-5xl mx-auto px-4 py-10 text-center">
-        <p className="text-gray-500">লগইন করুন বুকিং দেখার জন্য।</p>
+        <p className="text-gray-500">Please Login for booking</p>
       </div>
     );
   }
@@ -31,10 +32,10 @@ export default async function MyBookings() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold mb-8">সকল বুকিং</h1>
+      <h1 className="text-3xl font-bold mb-8">All Bookings</h1>
 
       {bookings.length === 0 ? (
-        <p className="text-center text-gray-500">কোনো বুকিং এখনো নেই।</p>
+        <p className="text-center text-gray-500">Booking is not available</p>
       ) : (
         <div className="grid gap-6">
           {bookings.map((booking) => {
@@ -102,64 +103,73 @@ export default async function MyBookings() {
                   </div>
                 </div>
 
-                {/* Right part */}
-                <div className="flex flex-col justify-between items-end">
-                  <p className="text-gray-500 text-sm">
-                    {new Date(booking.createdAt).toLocaleString()}
-                  </p>
+                
+                
+          {/* Right part */}
+          <div className="flex flex-col justify-between items-end gap-4">
+          {/* Date + Delete button*/}
+          <div className="flex items-center gap-4">
+          <p className="text-gray-500 text-sm">
+          {new Date(booking.createdAt).toLocaleString()}
+          </p>
 
-                  <div
-                    className={`px-4 py-1 rounded-full text-sm font-medium mt-3 ${
-                      booking.status === "pending"
-                        ? "bg-yellow-100 text-yellow-800"
-                        : booking.status === "confirmed"
-                        ? "bg-blue-100 text-blue-800"
-                        : booking.status === "cancelled"
-                        ? "bg-red-100 text-red-800"
-                        : "bg-green-100 text-green-800"
-                    }`}
-                  >
-                    {booking.status === "pending"
-                      ? "Pending"
-                      : booking.status === "confirmed"
-                      ? "Confirmed"
-                      : booking.status === "cancelled"
-                      ? "Cancelled"
-                      : "Unknown"}
-                  </div>
+          {/* Delete cross button */}
+          {isOwnBooking && (
+          <DeleteBookingButton bookingId={booking._id} />
+          )}
+          </div>
 
-                  <div className="flex flex-col gap-2 mt-4">
-                    <button className="bg-[#0abde3] text-white px-5 py-2 rounded-lg hover:opacity-90 transition">
-                      View Details
-                    </button>
+          {/* Status badge */}
+          <div
+          className={`px-4 py-1 rounded-full text-sm font-medium ${
+          booking.status === "pending"
+          ? "bg-yellow-100 text-yellow-800"
+          : booking.status === "confirmed"
+          ? "bg-blue-100 text-blue-800"
+          : booking.status === "cancelled"
+          ? "bg-red-100 text-red-800"
+          : "bg-green-100 text-green-800"
+          }`}
+          >
+          {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
+          </div>
 
-                    <DownloadButton booking={booking} />
+          {/* Action buttons */}
+          <div className="flex flex-col gap-2 w-full md:w-auto">
+          <button className="bg-[#0abde3] text-white px-5 py-2 rounded-lg hover:opacity-90 transition">
+          View Details
+          </button>
 
-                    {canCancel && (
-                      <form action={cancelBooking}>
-                        <input type="hidden" name="bookingId" value={booking._id} />
-                        <button
-                          type="submit"
-                          className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition"
-                        >
-                          Cancel Booking
-                        </button>
-                      </form>
-                    )}
+          <DownloadButton booking={booking} />
 
-                    {canConfirm && (
-                      <form action={confirmBooking}>
-                        <input type="hidden" name="bookingId" value={booking._id} />
-                        <button
-                          type="submit"
-                          className="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition"
-                        >
-                          Confirm Booking
-                        </button>
-                      </form>
-                    )}
-                  </div>
-                </div>
+          {canCancel && (
+          <form action={cancelBooking}>
+          <input type="hidden" name="bookingId" value={booking._id} />
+          <button
+          type="submit"
+          className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition"
+          >
+          Cancel Booking
+          </button>
+          </form>
+          )}
+
+          {canConfirm && (
+          <form action={confirmBooking}>
+          <input type="hidden" name="bookingId" value={booking._id} />
+          <button
+          type="submit"
+          className="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition"
+          >
+          Confirm Booking
+          </button>
+          </form>
+          )}
+          </div>
+          </div>
+
+
+
               </div>
             );
           })}
