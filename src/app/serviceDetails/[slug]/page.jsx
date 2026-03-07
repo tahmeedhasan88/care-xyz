@@ -32,7 +32,6 @@ const serviceDetails = async ({params}) => {
           <img
             src={service.image}
             alt={service.name}
-            fill
             className="object-cover"
           />
         </div>

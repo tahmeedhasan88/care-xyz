@@ -1,13 +1,32 @@
-import { NextResponse } from 'next/server'
- 
-const privateRoute = ["/serviceDetails",]
-export async function proxy(request) {
-  return NextResponse.redirect(new URL('/home', request.url))
+import { getToken } from "next-auth/jwt";
+import { NextResponse } from "next/server";
+
+const privateRoute = ["/serviceDetails", "/booking", "/my-bookings"];
+
+export async function middleware(req) {
+
+  const token = await getToken({ req });
+  const isAuthenticated = Boolean(token);
+
+  const isPrivateReq = privateRoute.some((route) =>
+    req.nextUrl.pathname.startsWith(route)
+  );
+
+
+  console.log("MIDDLEWARE RUNNING");
+console.log("PATH:", req.nextUrl.pathname);
+
+  if (!isAuthenticated && isPrivateReq) {
+    return NextResponse.redirect(new URL("/auth/login", req.url));
+  }
+
+  return NextResponse.next();
 }
- 
-// Alternatively, you can use a default export:
-// export default function proxy(request) { ... }
- 
+
 export const config = {
-  matcher: ['/serviceDetails/:path*',],
-}
+  matcher: [
+    "/serviceDetails/:path*",
+    "/booking/:path*",
+    "/my-bookings/:path*",
+  ],
+};

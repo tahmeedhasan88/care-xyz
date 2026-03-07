@@ -12,7 +12,7 @@ const Recognization = () => {
 
             {
                 session.status == "authenticated"?
-                (<div className='flex flex-col lg:flex-row items-center mt-2 lg:mt-0'><button onClick={()=> signOut()} className="px-5 py-2 rounded-lg text-white font-semibold 
+                (<div className='flex flex-col lg:flex-row items-center mt-2 lg:mt-0'><button onClick={()=> signOut({ callbackUrl: "/auth/login" })} className="px-5 py-2 rounded-lg text-white font-semibold 
                 bg-gradient-to-r from-[#10ac84] to-[#0abde3] 
                 hover:from-[#0abde3] hover:to-[#10ac84] 
                 transition-all duration-300 shadow-md hover:shadow-lg">Logout</button></div>):
