@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import Logo from './Layouts/Logo';
 import NavLink from './buttons/NavLink';
@@ -8,13 +9,16 @@ import { useSession } from 'next-auth/react';
 const Navbar = () => {
 
 
-const { data: session } = useSession();           // ← এটা যোগ করো
+const { data: session } = useSession();    
   const isLoggedIn = !!session?.user;
 
 const nav = <div className='flex flex-col lg:flex-row items-center gap-4 text-[16px] font-semibold'>
                 <li><NavLink href={"/"}>Home</NavLink></li>
                 <li><NavLink href={"/about-us"}>About</NavLink></li>
+
+                {isLoggedIn && (                              
                 <li><NavLink href={"/my-bookings"}>My Bookings</NavLink></li>
+                )}
             </div>
 
 
