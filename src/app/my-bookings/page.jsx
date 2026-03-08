@@ -46,7 +46,7 @@ export default async function MyBookings() {
             return (
               <div
                 key={booking._id}
-                className="bg-white rounded-2xl shadow-md p-6 flex flex-col md:flex-row justify-between gap-6 border"
+                className="bg-white text-black rounded-2xl shadow-md p-6 flex flex-col md:flex-row justify-between gap-6 border"
               >
                 {/* Left part */}
                 <div className="flex gap-4">

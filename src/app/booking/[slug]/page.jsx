@@ -149,7 +149,7 @@ const BookingPage = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
+    <div className="max-w-4xl mx-auto px-4 py-10 text-black">
       <h1 className="text-2xl font-bold ">Booking: <span className="text-[#10ac84]">{service.name}</span></h1>
       <h1 className="text-xl  font-semibold mb-6">Customer Name: <span className="text-[#0abde3]">{session?.user?.name}</span> </h1>
       
