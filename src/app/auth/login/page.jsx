@@ -1,45 +1,40 @@
 "use client"
 import GoogleButton from "@/app/Components/buttons/GoogleButton";
-import { signIn } from "next-auth/react"
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from "next/navigation";
-import React from 'react';
 import Swal from "sweetalert2";
 
 const Login = () => {
-
-  const searchParams = useSearchParams();
-  console.log()
-
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') ?? '/';
 
   const handleSubmit = async (e) => {
 
    e.preventDefault();
 
-   const form = e.target;
+    const form = e.target;
 
-   const formData = {
+    const email = form.email.value;
+    const password = form.password.value;
 
-    email: form.email.value,
-    password: form.password.value,
-
-   };
-
-   const result = await signIn("credentials", {
-    email: formData.email,
-    password: formData.password, 
-    // redirect: false,
-    callbackUrl: searchParams.get("callbackUrl") || "/",
+    const result = await signIn('credentials', {
+      redirect: false,
+      email,
+      password,
+      callbackUrl,
     });
-    console.log(result)
-    if(!result.ok){
-      Swal.fire("error", "Email and Password not matched", "error")
-    }else{
-      Swal.fire("Successful", "Welcome to Care.xyz", "success");
-      
+
+    if (!result?.ok) {
+      Swal.fire('Error', 'Email and password do not match', 'error');
+      return;
     }
-}
+
+    await Swal.fire('Successful', 'Welcome to Care.xyz', 'success');
+    router.push(callbackUrl);
+  };
+
 
 
     return (
@@ -90,12 +85,12 @@ const Login = () => {
         </div>
 
         {/* Google Login */}
-        <GoogleButton></GoogleButton>
-    
-        <h4 className='text-sm text-center mt-3'>Didn't have an account? <Link href={"/auth/register"}><span className='text-[#1f3b4d] font-semibold'>Register</span></Link></h4>
+        <GoogleButton />
+
+        <h4 className='text-sm text-center mt-3'>Don't have an account? <Link href="/auth/register"><span className='text-[#1f3b4d] font-semibold'>Register</span></Link></h4>
       </form>
     </div>
-    );
+  );
 };
 
 export default Login;

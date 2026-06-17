@@ -1,16 +1,15 @@
 // app/booking/[slug]/page.jsx
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import divisions from "@/app/data/divisions";
 import districts from "@/app/data/districts";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { getSingleService, createBooking } from "@/app/Server/service";
 import { useParams } from "next/navigation";
-import Loading from "./Loading"; 
+import Loading from "./Loading";
 import Swal from "sweetalert2";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 
 const BookingPage = () => {
   const params = useParams();

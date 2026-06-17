@@ -1,29 +1,18 @@
 import { getSingleService } from '@/app/Server/service';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
 
 export const metadata = {
-  title: "Baby Sitting Service",
-  description:
-    "Professional baby sitting service with trained and verified caregivers.",
+  title: 'Baby Sitting Service',
+  description: 'Professional baby sitting service with trained and verified caregivers.',
   openGraph: {
-    images: ["https://i.ibb.co/kVnTNSWx/tr6u.jpg"],
+    images: ['https://i.ibb.co/kVnTNSWx/tr6u.jpg'],
   },
 };
 
+const serviceDetails = async ({ params }) => {
+  const { slug } = params;
+  const service = await getSingleService(slug);
 
-
-const serviceDetails = async ({params}) => {
-
-    
-    const {slug} = await params;
-    const service = await getSingleService(slug);
-    console.log(service)
-
-    
-
-    return (
+  return (
         <div className="max-w-6xl mx-auto px-4 py-10 text-black">
       {/* Top Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
