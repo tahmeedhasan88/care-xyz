@@ -29,7 +29,7 @@ export default function DownloadButton({ booking }) {
           </button>
         ) : (
           <button type="button" className="bg-gray-600 text-white px-5 py-2 rounded-lg hover:bg-black transition flex items-center gap-1">
-            <FaFilePdf /> Download
+            <FaFilePdf /> Download PDF
           </button>
         )
       }
